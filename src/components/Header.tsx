@@ -16,10 +16,15 @@ function Header() {
   return (
     <>
       {/* 顶部标题和账户信息 */}
-      <Flex className="flex-row items-center mb-8" pt={4} w="100%">
+      <Flex
+        className="flex-row items-center mb-8"
+        pt={4}
+        w="100%"
+        position="relative"
+        justify="center"
+      >
         <Flex
           className="flex-col justify-between items-center"
-          flex="1"
           textAlign="center"
         >
           <Text fontSize="2xl" fontWeight="bold" color="#fbbf24">
@@ -51,8 +56,11 @@ function Header() {
         <Flex
           className="flex flex-col items-end"
           textAlign="right"
-          ml="auto"
-          mr={6}
+          position="absolute"
+          right={0}
+          top="50%"
+          transform="translateY(-50%)"
+          pr={4}
         >
           <Text fontSize="sm" color="#9ca3af" mb={1}>
             账户余额:{" "}
