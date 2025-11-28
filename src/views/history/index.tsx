@@ -1,7 +1,4 @@
-import {
-  Box,
-  Text,
-} from '@chakra-ui/react'
+import { Box, Text } from "@chakra-ui/react";
 
 function History() {
   return (
@@ -11,8 +8,7 @@ function History() {
       </Text>
       <Text color="#9ca3af">暂无历史记录</Text>
     </Box>
-  )
+  );
 }
 
-export default History
-
+export default History;

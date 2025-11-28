@@ -1,28 +1,24 @@
-import {
-  Box,
-  Text,
-  Button,
-} from '@chakra-ui/react'
+import { Box, Text, Button } from "@chakra-ui/react";
 
 function Home() {
   const tableStyle = {
-    width: '100%',
-    borderCollapse: 'collapse' as const,
-  }
+    width: "100%",
+    borderCollapse: "collapse" as const,
+  };
 
   const thStyle = {
-    padding: '12px 16px',
-    textAlign: 'left' as const,
-    backgroundColor: '#1f2937',
-    color: '#d1d5db',
-    fontWeight: '600',
-    borderBottom: '1px solid #374151',
-  }
+    padding: "12px 16px",
+    textAlign: "left" as const,
+    backgroundColor: "#1f2937",
+    color: "#d1d5db",
+    fontWeight: "600",
+    borderBottom: "1px solid #374151",
+  };
 
   const tdStyle = {
-    padding: '12px 16px',
-    borderBottom: '1px solid #374151',
-  }
+    padding: "12px 16px",
+    borderBottom: "1px solid #374151",
+  };
 
   return (
     <Box>
@@ -64,7 +60,7 @@ function Home() {
                     size="sm"
                     bg="#fbbf24"
                     color="black"
-                    _hover={{ bg: '#f59e0b' }}
+                    _hover={{ bg: "#f59e0b" }}
                     fontWeight="600"
                   >
                     确定执行
@@ -119,7 +115,7 @@ function Home() {
                     size="sm"
                     bg="#fbbf24"
                     color="black"
-                    _hover={{ bg: '#f59e0b' }}
+                    _hover={{ bg: "#f59e0b" }}
                     fontWeight="600"
                   >
                     确定执行
@@ -131,8 +127,7 @@ function Home() {
         </Box>
       </Box>
     </Box>
-  )
+  );
 }
 
-export default Home
-
+export default Home;
