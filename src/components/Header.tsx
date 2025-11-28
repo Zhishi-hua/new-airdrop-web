@@ -1,4 +1,4 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import { Link, useLocation } from "react-router-dom";
 
 function Header() {
@@ -48,7 +48,7 @@ function Header() {
             </Link>
           </Flex>
         </Flex>
-        <Box
+        <Flex
           className="flex flex-col items-end"
           textAlign="right"
           ml="auto"
@@ -66,7 +66,7 @@ function Header() {
               4124 USDT
             </Text>
           </Text>
-        </Box>
+        </Flex>
       </Flex>
     </>
   );
