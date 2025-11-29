@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Home from "./views/home";
 import History from "./views/history";
 import Monitor from "./views/monitor";
+import Trade from "./views/trade";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/monitor" element={<Monitor />} />
           <Route path="/history" element={<History />} />
+          <Route path="/trade" element={<Trade />} />
         </Routes>
       </Box>
     </Box>
