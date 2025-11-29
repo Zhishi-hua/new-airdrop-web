@@ -1,4 +1,6 @@
-import { Box, Text, Flex } from "@chakra-ui/react";
+import { Box, Text, Flex, Image } from "@chakra-ui/react";
+import { useState, useMemo } from "react";
+import pinnedIcon from "../../assets/pinned.svg";
 
 const tableStyle = {
   width: "100%",
@@ -134,6 +136,26 @@ const historyData = [
 ];
 
 function History() {
+  const [data, setData] = useState(historyData);
+
+  // 切换置顶状态
+  const togglePin = (id: number) => {
+    setData((prevData) =>
+      prevData.map((item) =>
+        item.id === id ? { ...item, pinned: !item.pinned } : item,
+      ),
+    );
+  };
+
+  // 排序：置顶的排在前面
+  const sortedData = useMemo(() => {
+    return [...data].sort((a, b) => {
+      if (a.pinned && !b.pinned) return -1;
+      if (!a.pinned && b.pinned) return 1;
+      return 0;
+    });
+  }, [data]);
+
   return (
     <Box>
       {/* 标题 */}
@@ -153,7 +175,25 @@ function History() {
         borderRadius="md"
         overflow="hidden"
       >
-        <table style={tableStyle}>
+        <style>
+          {`
+            .history-table tbody tr {
+              transition: background-color 0.2s ease;
+            }
+            .history-table tbody tr:hover {
+              background-color: rgba(237, 231, 199, 0.1);
+              cursor: pointer;
+            }
+            .pinned-icon {
+              filter: grayscale(100%) brightness(0.7) opacity(0.7);
+              transition: filter 0.2s ease;
+            }
+            .pinned-icon.active {
+              filter: grayscale(0) sepia(1) saturate(4500%) hue-rotate(-5deg) brightness(1.05);
+            }
+          `}
+        </style>
+        <table className="history-table" style={tableStyle}>
           <thead>
             <tr>
               <th style={thStyle}>
@@ -166,7 +206,7 @@ function History() {
               </th>
               <th style={thStyle}>
                 <Flex alignItems="center" gap={1}>
-                  积分
+                  已购买额度
                   <Text fontSize="xs" color="#9ca3af">
                     ▼
                   </Text>
@@ -174,39 +214,23 @@ function History() {
               </th>
               <th style={thStyle}>
                 <Flex alignItems="center" gap={1}>
-                  数量
+                  已购数量
                   <Text fontSize="xs" color="#9ca3af">
                     ▼
                   </Text>
                 </Flex>
               </th>
-              <th style={{ ...thStyle, color: "#fbbf24" }}>
-                <Flex alignItems="center" gap={1}>
-                  MC
-                  <Text fontSize="xs" color="#fbbf24">
-                    ▼
-                  </Text>
-                </Flex>
-              </th>
               <th style={thStyle}>日期</th>
-              <th style={thStyle}></th>
+              <th style={thStyle}>
+                <Image src={pinnedIcon} alt="pinned" w="16px" h="20px" />
+              </th>
             </tr>
           </thead>
           <tbody>
-            {historyData.map((item) => (
+            {sortedData.map((item) => (
               <tr key={item.id}>
                 <td style={tdStyle}>
                   <Flex alignItems="center" gap={2}>
-                    <Box
-                      w="8px"
-                      h="8px"
-                      borderRadius="2px"
-                      bg={
-                        item.symbol === "IRYS" || item.symbol === "BOB"
-                          ? "#10b981"
-                          : "#6b7280"
-                      }
-                    />
                     <Box>
                       <Text fontWeight="bold">{item.symbol}</Text>
                       <Text fontSize="xs" color="#9ca3af">
@@ -228,15 +252,21 @@ function History() {
                   </Text>
                 </td>
                 <td style={tdStyle}>
-                  <Text>{item.mc}</Text>
-                </td>
-                <td style={tdStyle}>
                   <Text>{item.date}</Text>
                 </td>
                 <td style={tdStyle}>
-                  <Text fontSize="lg" color="#fbbf24" cursor="pointer">
-                    📌
-                  </Text>
+                  <Image
+                    src={pinnedIcon}
+                    alt="pinned"
+                    w="16px"
+                    h="20px"
+                    cursor="pointer"
+                    className={`pinned-icon ${item.pinned ? "active" : ""}`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      togglePin(item.id);
+                    }}
+                  />
                 </td>
               </tr>
             ))}

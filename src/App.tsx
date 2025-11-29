@@ -1,8 +1,8 @@
-import { Routes, Route } from "react-router-dom";
-import { Box } from "@chakra-ui/react";
-import Header from "./components/Header";
-import Home from "./views/home";
-import History from "./views/history";
+import { Routes, Route } from 'react-router-dom'
+import { Box } from '@chakra-ui/react'
+import Header from './components/Header'
+import Home from './views/home'
+import History from './views/history'
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
         </Routes>
       </Box>
     </Box>
-  );
+  )
 }
 
-export default App;
+export default App
