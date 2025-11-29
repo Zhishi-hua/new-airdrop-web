@@ -1,6 +1,6 @@
-import { Box } from '@chakra-ui/react'
-import TodaySection from './today'
-import TrailerSection from './trailer'
+import { Box } from "@chakra-ui/react";
+import TodaySection from "./today";
+import TrailerSection from "./trailer";
 
 function Home() {
   return (
@@ -8,7 +8,7 @@ function Home() {
       <TodaySection />
       <TrailerSection />
     </Box>
-  )
+  );
 }
 
-export default Home
+export default Home;

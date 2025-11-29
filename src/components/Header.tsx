@@ -1,17 +1,17 @@
-import { Flex, Text } from '@chakra-ui/react'
-import { Link, useLocation } from 'react-router-dom'
+import { Flex, Text } from "@chakra-ui/react";
+import { Link, useLocation } from "react-router-dom";
 
 function Header() {
-  const location = useLocation()
-  const isHome = location.pathname === '/'
+  const location = useLocation();
+  const isHome = location.pathname === "/";
 
   const linkStyle = {
-    textDecoration: 'none',
-    padding: '8px 16px',
-    borderBottom: '2px solid transparent',
-    color: '#9ca3af',
-    cursor: 'pointer',
-  }
+    textDecoration: "none",
+    padding: "8px 16px",
+    borderBottom: "2px solid transparent",
+    color: "#9ca3af",
+    cursor: "pointer",
+  };
 
   return (
     <>
@@ -23,7 +23,10 @@ function Header() {
         position="relative"
         justify="center"
       >
-        <Flex className="flex-col justify-between items-center" textAlign="center">
+        <Flex
+          className="flex-col justify-between items-center"
+          textAlign="center"
+        >
           <Text fontSize="2xl" fontWeight="bold" color="#fbbf24">
             币安打新日历
           </Text>
@@ -32,8 +35,8 @@ function Header() {
               to="/"
               style={{
                 ...linkStyle,
-                borderBottomColor: isHome ? '#fbbf24' : 'transparent',
-                color: isHome ? '#fbbf24' : '#9ca3af',
+                borderBottomColor: isHome ? "#fbbf24" : "transparent",
+                color: isHome ? "#fbbf24" : "#9ca3af",
               }}
             >
               今日
@@ -42,8 +45,8 @@ function Header() {
               to="/history"
               style={{
                 ...linkStyle,
-                borderBottomColor: !isHome ? '#fbbf24' : 'transparent',
-                color: !isHome ? '#fbbf24' : '#9ca3af',
+                borderBottomColor: !isHome ? "#fbbf24" : "transparent",
+                color: !isHome ? "#fbbf24" : "#9ca3af",
               }}
             >
               历史
@@ -60,13 +63,13 @@ function Header() {
           pr={4}
         >
           <Text fontSize="sm" color="#9ca3af" mb={1}>
-            账户余额:{' '}
+            账户余额:{" "}
             <Text as="span" color="#fbbf24">
               {/* 4124 USDT */}
             </Text>
           </Text>
           <Text fontSize="sm" color="#9ca3af">
-            账户总价值:{' '}
+            账户总价值:{" "}
             <Text as="span" color="#fbbf24">
               {/* 4124 USDT */}
             </Text>
@@ -74,7 +77,7 @@ function Header() {
         </Flex>
       </Flex>
     </>
-  )
+  );
 }
 
-export default Header
+export default Header;
