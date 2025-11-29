@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 
 function Header() {
   const location = useLocation();
-  const isHome = location.pathname === "/";
+  const pathname = location.pathname;
 
   const linkStyle = {
     textDecoration: "none",
@@ -12,6 +12,8 @@ function Header() {
     color: "#9ca3af",
     cursor: "pointer",
   };
+
+  const isActive = (path: string) => pathname === path;
 
   return (
     <>
@@ -32,11 +34,23 @@ function Header() {
           </Text>
           <Flex>
             <Link
+              to="/monitor"
+              style={{
+                ...linkStyle,
+                borderBottomColor: isActive("/monitor")
+                  ? "#fbbf24"
+                  : "transparent",
+                color: isActive("/monitor") ? "#fbbf24" : "#9ca3af",
+              }}
+            >
+              监控
+            </Link>
+            <Link
               to="/"
               style={{
                 ...linkStyle,
-                borderBottomColor: isHome ? "#fbbf24" : "transparent",
-                color: isHome ? "#fbbf24" : "#9ca3af",
+                borderBottomColor: isActive("/") ? "#fbbf24" : "transparent",
+                color: isActive("/") ? "#fbbf24" : "#9ca3af",
               }}
             >
               今日
@@ -45,11 +59,25 @@ function Header() {
               to="/history"
               style={{
                 ...linkStyle,
-                borderBottomColor: !isHome ? "#fbbf24" : "transparent",
-                color: !isHome ? "#fbbf24" : "#9ca3af",
+                borderBottomColor: isActive("/history")
+                  ? "#fbbf24"
+                  : "transparent",
+                color: isActive("/history") ? "#fbbf24" : "#9ca3af",
               }}
             >
               历史
+            </Link>
+            <Link
+              to="/trade"
+              style={{
+                ...linkStyle,
+                borderBottomColor: isActive("/trade")
+                  ? "#fbbf24"
+                  : "transparent",
+                color: isActive("/trade") ? "#fbbf24" : "#9ca3af",
+              }}
+            >
+              交易设置
             </Link>
           </Flex>
         </Flex>

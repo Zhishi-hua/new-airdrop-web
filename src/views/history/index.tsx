@@ -1,5 +1,5 @@
 import { Box, Text, Flex, Image } from "@chakra-ui/react";
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import pinnedIcon from "../../assets/pinned.svg";
 
 const tableStyle = {
@@ -24,7 +24,7 @@ const tdStyle = {
 };
 
 // 历史空投数据
-const historyData = [
+const baseHistoryData = [
   {
     id: 1,
     symbol: "VSN",
@@ -135,26 +135,49 @@ const historyData = [
   },
 ];
 
+type HistoryItem = (typeof baseHistoryData)[number] & {
+  order: number;
+  pinnedAt: number | null;
+};
+
+const now = Date.now();
+const withMetaData: HistoryItem[] = baseHistoryData.map((item, index) => ({
+  ...item,
+  order: index,
+  pinnedAt: item.pinned ? now - (baseHistoryData.length - index) : null,
+}));
+
+const sortByPinned = (list: HistoryItem[]): HistoryItem[] => {
+  const pinnedRows = list
+    .filter((item) => item.pinned)
+    .sort((a, b) => (b.pinnedAt ?? 0) - (a.pinnedAt ?? 0));
+
+  const normalRows = list
+    .filter((item) => !item.pinned)
+    .sort((a, b) => a.order - b.order);
+
+  return [...pinnedRows, ...normalRows];
+};
+
 function History() {
-  const [data, setData] = useState(historyData);
+  const [data, setData] = useState(() => sortByPinned(withMetaData));
 
   // 切换置顶状态
   const togglePin = (id: number) => {
     setData((prevData) =>
-      prevData.map((item) =>
-        item.id === id ? { ...item, pinned: !item.pinned } : item,
+      sortByPinned(
+        prevData.map((item) =>
+          item.id === id
+            ? {
+                ...item,
+                pinned: !item.pinned,
+                pinnedAt: !item.pinned ? Date.now() : null,
+              }
+            : item,
+        ),
       ),
     );
   };
-
-  // 排序：置顶的排在前面
-  const sortedData = useMemo(() => {
-    return [...data].sort((a, b) => {
-      if (a.pinned && !b.pinned) return -1;
-      if (!a.pinned && b.pinned) return 1;
-      return 0;
-    });
-  }, [data]);
 
   return (
     <Box>
@@ -185,11 +208,11 @@ function History() {
               cursor: pointer;
             }
             .pinned-icon {
-              filter: grayscale(100%) brightness(0.7) opacity(0.7);
+              filter: grayscale(0) sepia(1) saturate(4500%) hue-rotate(-5deg) brightness(1.05);
               transition: filter 0.2s ease;
             }
             .pinned-icon.active {
-              filter: grayscale(0) sepia(1) saturate(4500%) hue-rotate(-5deg) brightness(1.05);
+              filter: grayscale(100%) brightness(0.7) opacity(0.7);
             }
           `}
         </style>
@@ -227,7 +250,7 @@ function History() {
             </tr>
           </thead>
           <tbody>
-            {sortedData.map((item) => (
+            {data.map((item) => (
               <tr key={item.id}>
                 <td style={tdStyle}>
                   <Flex alignItems="center" gap={2}>

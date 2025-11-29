@@ -3,6 +3,7 @@ import { Box } from "@chakra-ui/react";
 import Header from "./components/Header";
 import Home from "./views/home";
 import History from "./views/history";
+import Monitor from "./views/monitor";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Box maxW="1400px" mx="auto" mt={8}>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/monitor" element={<Monitor />} />
           <Route path="/history" element={<History />} />
         </Routes>
       </Box>
