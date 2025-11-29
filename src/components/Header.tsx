@@ -65,13 +65,13 @@ function Header() {
           <Text fontSize="sm" color="#9ca3af" mb={1}>
             账户余额:{" "}
             <Text as="span" color="#fbbf24">
-              4124 USDT
+              {/* 4124 USDT */}
             </Text>
           </Text>
           <Text fontSize="sm" color="#9ca3af">
             账户总价值:{" "}
             <Text as="span" color="#fbbf24">
-              4124 USDT
+              {/* 4124 USDT */}
             </Text>
           </Text>
         </Flex>

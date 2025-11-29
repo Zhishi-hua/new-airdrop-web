@@ -10,7 +10,7 @@ function App() {
       <Box borderBottom="1px solid" borderColor="#374151" bg="#1f2937" w="100%">
         <Header />
       </Box>
-      <Box maxW="1400px" mx="auto">
+      <Box maxW="1400px" mx="auto" mt={8}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/history" element={<History />} />
